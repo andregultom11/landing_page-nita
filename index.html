@@ -581,42 +581,13 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 42px;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 36px;
-            }
-            
-            .about-content, .contact-container {
-                flex-direction: column;
-            }
-            
-            .about-text, .contact-info {
-                padding-right: 0;
-                margin-bottom: 40px;
-            }
-        }
-
         /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             font-size: 24px;
             color: #fff;
             cursor: pointer;
+            z-index: 1002;
         }
 
         .mobile-nav {
@@ -666,6 +637,139 @@
             font-size: 24px;
             color: #fff;
             cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 0 5%;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+            }
+            
+            .about, .gallery, .memories, .contact {
+                padding: 80px 5%;
+            }
+            
+            .section-title {
+                font-size: 30px;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+            
+            .memories-container {
+                gap: 20px;
+            }
+            
+            .memory-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            footer {
+                padding: 40px 5% 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-column {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                height: 300px;
+            }
+            
+            .about-text p, .contact-info p {
+                font-size: 16px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 26px;
+            }
+            
+            .about, .gallery, .memories, .contact {
+                padding: 60px 5%;
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -956,10 +1060,20 @@
         
         mobileMenuBtn.addEventListener('click', function() {
             mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
         
         closeBtn.addEventListener('click', function() {
             mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
         });
         
         // Smooth scrolling for anchor links
@@ -979,6 +1093,7 @@
                     
                     // Close mobile menu if open
                     mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             });
         });
